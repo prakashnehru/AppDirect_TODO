@@ -15,22 +15,58 @@ var todoButtonCompleted=element( by.xpath( '//*[@id="filters"]/li[3]/a'));
     }
     //Validation to check if 6 tasks are added or not
     expect(todoCount.getText()).toEqual('6');
+
+    todoButtonAll.click();
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[1]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[2]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[3]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[4]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[5]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[6]')).isPresent()).toBe(true);
+
+    todoButtonActive.click();
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[1]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[2]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[3]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[4]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[5]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[6]')).isPresent()).toBe(true);
+
+    todoButtonCompleted.click();
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[1]')).isPresent()).toBe(false);
+
    });
 
   it('TC2:Test for removing a task with X',function(){
     // this is for hover over the mouse
-     
+    todoButtonAll.click(); 
     var removeTodo = element( by.xpath( '//*[@id="todo-list"]/li[6]/div/label'));
     browser.actions().mouseMove( removeTodo ).perform();
      
     //this is for deleting 6th task by clicking X button from 6 tasks
     element( by.xpath('//*[@id="todo-list"]/li[6]/div/button')).click();
     expect(todoCount.getText()).toEqual('5');
+
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[1]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[2]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[3]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[4]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[5]')).isPresent()).toBe(true);
+
+    todoButtonActive.click();
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[1]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[2]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[3]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[4]')).isPresent()).toBe(true);
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[5]')).isPresent()).toBe(true);
+
+    todoButtonCompleted.click();
+    expect(element(by.xpath( '//*[@id="todo-list"]/li[1]')).isPresent()).toBe(false);
      
     });
 
   it('TC3:Test for selecting tasks',function(){
-
+    todoButtonAll.click(); 
     //Mark completed as 1 and 3
     browser.actions().mouseMove( element( by.xpath( '//*[@id="todo-list"]/li[1]/div/input')) ).perform();
     element( by.xpath( '//*[@id="todo-list"]/li[1]/div/input')).click();
@@ -39,7 +75,7 @@ var todoButtonCompleted=element( by.xpath( '//*[@id="filters"]/li[3]/a'));
     element( by.xpath( '//*[@id="todo-list"]/li[3]/div/input')).click();
 
     expect(todoCount.getText()).toEqual('3');
-     
+
   });
 
 
@@ -56,7 +92,7 @@ var todoButtonCompleted=element( by.xpath( '//*[@id="filters"]/li[3]/a'));
     
   });
 
- it('TC5:Test for validating Currently Active tasks',function(){
+  it('TC5:Test for validating Currently Active tasks',function(){
     //Checking what are the tasks in the active or not by clicking Active
     browser.actions().mouseMove( todoButtonActive ).perform();
   
@@ -71,7 +107,7 @@ var todoButtonCompleted=element( by.xpath( '//*[@id="filters"]/li[3]/a'));
   });
 
 
-it('TC6:Test for validating All  tasks',function(){
+  it('TC6:Test for validating All  tasks',function(){
      
     browser.actions().mouseMove( todoButtonAll ).perform();
     //By clicking check all button
@@ -87,7 +123,7 @@ it('TC6:Test for validating All  tasks',function(){
   });
 
 
-it('TC7:Test for validating if all tasks are completed',function(){
+  it('TC7:Test for validating if all tasks are completed',function(){
     // Testing all the tasks are selected or not
     var allChecked = element( by.xpath( '//*[@id="toggle-all"]'));
     browser.actions().mouseMove( allChecked ).perform();
@@ -96,9 +132,9 @@ it('TC7:Test for validating if all tasks are completed',function(){
     // expecting the value which are done if so it should be 0
     expect(todoCount.getText()).toEqual('0');
     
-  });
+   });
 
-it('TC8:Test for validating clear all completed',function(){
+  it('TC8:Test for validating clear all completed',function(){
     //click the to do button all 
     todoButtonAll.click();
      
@@ -107,11 +143,7 @@ it('TC8:Test for validating clear all completed',function(){
     element( by.xpath( '//*[@id="clear-completed"]')).click();
     expect(element(by.xpath( '//*[@id="todo-list"]/li[1]')).isPresent()).toBe(false);
      
-  });
+   });
 
 
 });
- 
-
-
-
